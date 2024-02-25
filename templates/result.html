@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Result</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bmi-style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="container1">
+        <div class="result">
+            <p id="p1">You are <strong id="statuscolor">{{ status }}</strong> and your BMI is <strong id="statuscolor1">{{ bmi }}</strong></p>
+        </div>
+    </div>
+    <div class="container2">
+        <div id="plotcontainer">
+            <div class="bubbles">
+                <div class="bubble bubble-yellow" style="font-size: 10px; text-indent: 16px; font-style: italic; font-size: 12px;">Underweight</div>
+                <div class="bubble bubble-green" style="font-size: 10px; text-indent: 16px; font-style: italic; font-size: 12px; margin-left: 20px ;">Healthy</div>
+                <div class="bubble bubble-brown" style="font-size: 10px; text-indent: 16px; font-style: italic; font-size: 12px; ">Overweight</div>
+                <div class="bubble bubble-darkbrown" style="font-size: 10px; text-indent: 16px; font-style: italic; font-size: 12px; margin-left: 16px;">Obese</div>
+                <div class="bubble bubble-red" style="font-size: 10px; text-indent: 16px; font-style: italic; font-size: 12px;">ExtreamlyObese</div>
+
+            </div>
+                        <div id="plot" style="width: 600px; height: 400px;"></div>
+        </div>
+        <div id="instructionscontainer">
+            <br><br>
+            <ul>
+                <li><strong>Balanced Diet:</strong> Maintain a balanced diet with a variety of fruits, vegetables, lean proteins, whole grains, and healthy fats.</li><br>
+                <li><strong>Physical Activity:</strong> Stay active with regular exercise, including aerobic activities, strength training, and flexibility exercises.</li><br>
+                <li><strong>Portion Control:</strong> Practice mindful eating and portion control to prevent overeating and maintain a healthy weight.</li><br>
+                <li><strong>Regular Check-ups:</strong> Schedule regular health check-ups and screenings to monitor overall health and prevent potential health issues.</li><br>
+                <li><strong>Meal Planning:</strong> Plan meals and snacks in advance to avoid impulsive eating and make healthier food choices.</li>
+                <li><strong>Exercise Routine:</strong> Establish a structured exercise routine that includes a combination of exercises(atleast 300 mins)</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <script>
+        // Define the data for the bubble
+        var height = {{ height }};
+        var weight = {{ weight }};
+        var status1 = "{{ status }}";
+        
+        
+        // Generate additional points along the infinite line segment
+        var points = [];
+        var x1 = 200, y1 = 74;
+        var x2 = 150, y2 = 41.625;
+        var slope = (y2 - y1) / (x2 - x1);
+        for (var x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
+            var y = slope * (x - x1) + y1;
+            points.push({ x: x, y: y });
+        }
+
+        var bubbleColor;
+        // Set bubble color based on status
+        if (status1 === "Healthy") {
+            bubbleColor = 'green';
+        } else if (status1 === "Overweight") {
+            bubbleColor = '#B5651D';
+        } else if (status1 === "Obese") {
+            bubbleColor = '#654321';
+        } else if (status1 === "Extremely Obese") {
+            bubbleColor = 'red';
+        } else if (status1 === "Underweight") {
+            bubbleColor = 'yellow';
+        }
+
+        document.getElementById('statuscolor').style.color = bubbleColor;
+        document.getElementById('statuscolor1').style.color = bubbleColor;
+
+        
+        var data = [{
+            x: [height], // Height on the x-axis
+            y: [weight],  // Weight on the y-axis
+            mode: 'markers',
+            marker: {
+                size: 15, // Bubble size
+                color: bubbleColor // Bubble color
+            },
+            hoverinfo: 'none',
+        }];
+
+        // Define layout options
+        var layout = {
+            title: '',
+            xaxis: {
+                title: 'Height(cm)', // x-axis label
+                range: [height - 150, height + 150], // Set the range based on height
+            },
+            yaxis: {
+                title: 'Weight(kg)', // y-axis label
+                range: [weight - 50, weight + 70], // Set the range based on weight
+            },
+            plot_bgcolor: "" // Set background color
+            };
+        // Define frames for animation
+        var frames = [{
+            data: [{ x: [height], y: [weight], mode: 'markers', marker: { size: 38, color: bubbleColor } }],
+            layout: {}
+        }, {
+            data: [{ x: [height], y: [weight], mode: 'markers', marker: { size: 18, color: bubbleColor } }],
+            layout: {}
+        }];
+
+        // Create the Plotly graph
+        Plotly.newPlot('plot', data, layout).then(function() {
+            // Animate the bubble
+            Plotly.animate('plot', frames, { 
+                transition: {
+                    duration: 1000,
+                    easing: 'linear'
+                },
+                frame: {
+                    duration: 1000
+                },
+                mode: 'afterall'
+            });
+        });
+    </script>
+</body>
+</html>
