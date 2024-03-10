@@ -6,7 +6,7 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
-@app.route('/result', methods=['POST','GET'])
+@app.route('/result/', methods=['POST','GET'])
 def result():
     if request.method == 'POST':
        # Get the bmi, status, weight and height from the ajax request
@@ -21,4 +21,4 @@ def result():
         
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)
