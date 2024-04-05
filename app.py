@@ -1,9 +1,38 @@
-from flask import Flask, render_template_string, request, jsonify, render_template, redirect, url_for
+from flask import Flask, render_template_string, request, jsonify, render_template, redirect, url_for, Response
+from prometheus_client import Counter, generate_latest, Histogram, Gauge, Summary
 
 app = Flask(__name__)
 
+# Define Prometheus metrics
+REQUEST_COUNT = Counter(
+    'http_requests_total',
+    'Total number of HTTP requests',
+    ['method', 'endpoint', 'status_code']
+)
+
+REQUEST_DURATION = Histogram(
+    'http_request_duration_seconds',
+    'Duration of HTTP requests',
+    ['method', 'endpoint']
+)
+
+CURRENT_USERS = Gauge(
+    'current_users',
+    'Current number of active users'
+)
+
+PROCESSING_TIME = Summary(
+    'processing_time_seconds',
+    'Processing time of some task in seconds'
+)
+
 @app.route('/')
 def hello_world():
+    with REQUEST_DURATION.labels(method='GET', endpoint='/').time():
+        REQUEST_COUNT.labels(method='GET', endpoint='/', status_code=200).inc()
+        CURRENT_USERS.inc()
+        PROCESSING_TIME.observe(0.5)
+
     return render_template('index.html')
 
 @app.route('/result/', methods=['POST','GET'])
@@ -18,7 +47,10 @@ def result():
 
         return render_template('result.html', height=height, weight=weight, bmi=bmi, status=status)
         
-        
+# Custom metrics endpoint
+@app.route('/metrics')
+def metrics():
+    return Response(generate_latest(), mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000,debug=True)
