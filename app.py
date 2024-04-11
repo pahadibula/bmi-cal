@@ -40,17 +40,31 @@ def result():
     if request.method == 'POST':
        # Get the bmi, status, weight and height from the ajax request
         data = request.get_json()
+
+        # Check if the input data is valid
+        if not all(data.get(field) for field in ['bmi', 'status', 'height', 'weight']):
+            return jsonify({'error': 'Invalid or missing input data'}), 400
+
+        # Get the bmi, status, weight and height from the ajax request
         bmi = data['bmi']
         status = data['status']
         height = data['height']
         weight = data['weight']
-
         return render_template('result.html', height=height, weight=weight, bmi=bmi, status=status)
+    
+    return jsonify({'error': 'Method not allowed'}), 405
+
+        
         
 # Custom metrics endpoint
 @app.route('/metrics')
 def metrics():
     return Response(generate_latest(), mimetype='text/plain')
+
+@app.route('/decrement_users', methods=['POST'])
+def decrement_users():
+    CURRENT_USERS.dec()
+    return "OK"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000,debug=True)
