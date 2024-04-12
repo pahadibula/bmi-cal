@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, jsonify, render_template, redirect, url_for, Response
+from flask import Flask, render_template_string, request, jsonify, render_template, redirect, url_for, Response, json
 from prometheus_client import Counter, generate_latest, Histogram, Gauge, Summary
 
 app = Flask(__name__)
@@ -50,7 +50,20 @@ def result():
         status = data['status']
         height = data['height']
         weight = data['weight']
-        return render_template('result.html', height=height, weight=weight, bmi=bmi, status=status)
+
+        # Read diet plans from JSON file
+        with open('diet_plans.json', 'r') as file:
+            all_diet_plans = json.load(file)
+
+        diet_plan = all_diet_plans.get(status,[])
+
+        # Read workout plans from JSON file
+        with open('workout_plans.json', 'r') as file:
+            all_workout_plans = json.load(file)
+
+        workout_plans = all_workout_plans.get(status,[])
+
+        return render_template('result.html', height=height, weight=weight, bmi=bmi, status=status, diet_plans=diet_plan, workout_plans=workout_plans)
     
     return jsonify({'error': 'Method not allowed'}), 405
 
