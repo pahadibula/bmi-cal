@@ -1,0 +1,43 @@
+name: Push-to-DockerHub-and-EC2
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build, Push to Docker Hub, and Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      # Step to run Pytest
+      - name: Run Pytest
+        run: |
+          pip install -r requirements.txt
+          python3 -m pytest
+
+      # Step to build the Docker image
+      - name: Build Docker image
+        run: docker build -t sharmavidit/bmicicd .
+
+      # Step to login to Docker Hub
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u sharmavidit --password-stdin
+
+      # Step to push the Docker image to Docker Hub
+      - name: Push to Docker Hub
+        run: docker push sharmavidit/bmicicd
+
+      # Step to deploy to EC2
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ec2-user
+          TARGET: /home/ec2-user/downloads
