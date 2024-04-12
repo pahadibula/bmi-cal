@@ -180,10 +180,13 @@ ul{
     margin-right: 10px; /* Add margin between graph and instructions */
     margin-top: 50px;
     background-color: white;
+    margin: 0 10px; /* Add this line */
+
 }
 .container2 {
     display: flex;
     align-items: top; /* Align items vertically */
+    justify-content: center; /* Center items horizontally */
 }
 .bubble {
     width: 15px;
@@ -211,3 +214,30 @@ ul{
 .bubble-red {
     background-color: red;
 }
+
+.plancontainer{
+    display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+}
+
+.plan{
+    width: 40%; 
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin: 0 10px; 
+}
+
+.plan ul{
+    text-align: justify;
+    margin: 0;
+    text-wrap: wrap;
+}
+
+.plan li {
+    padding: 15px 0;
+    margin-right: 20px;
+}
+

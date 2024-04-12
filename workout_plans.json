@@ -1,0 +1,43 @@
+{
+    "Underweight": [
+        "Focus on strength training exercises to build muscle mass and improve overall strength.",
+        "Incorporate bodyweight exercises such as push-ups, squats, lunges, and planks.",
+        "Include resistance training with light weights or resistance bands to gradually increase muscle strength.",
+        "Engage in low-impact cardio activities like walking, swimming, or cycling to improve cardiovascular health without excessive calorie burn.",
+        "Aim for consistency in exercise routine while allowing adequate rest for muscle recovery and growth."
+    ],
+
+    "Healthy": [
+        "Maintain a balanced exercise routine that includes a mix of cardiovascular exercises, strength training, and flexibility exercises.",
+        "Incorporate moderate-intensity aerobic activities like brisk walking, jogging, cycling, or dancing for at least 150 minutes per week.",
+        "Include strength training exercises targeting major muscle groups at least two days per week to improve muscle tone and strength.",
+        "Practice flexibility exercises such as yoga or stretching to enhance mobility and prevent injuries.",
+        "Stay active throughout the day by incorporating activities like walking breaks, taking the stairs, or participating in recreational sports."
+    ],
+
+    "Overweight": [
+        "Focus on low-impact exercises to reduce stress on joints and minimize the risk of injury.",
+        "Engage in activities like swimming, water aerobics, or cycling to provide cardiovascular benefits while being gentle on the joints.",
+        "Incorporate strength training exercises using body weight, resistance bands, or light weights to build muscle and increase metabolism.",
+        "Aim for gradual progression in exercise intensity and duration to avoid overexertion and burnout.",
+        "Incorporate flexibility exercises to improve range of motion and prevent muscle stiffness."
+    ],
+
+    "Obese": [
+        "Start with low-impact exercises like walking, stationary cycling, or water aerobics to minimize strain on joints.",
+        "Gradually increase exercise intensity and duration as fitness levels improve, aiming for at least 150 minutes of moderate-intensity aerobic activity per week.",
+        "Include strength training exercises using resistance bands, light weights, or weight machines to build muscle mass and boost metabolism.",
+        "Incorporate interval training or circuit training workouts to maximize calorie burn and improve cardiovascular fitness.",
+        "Focus on maintaining consistency in exercise routine while listening to your body and allowing for adequate recovery between sessions."
+    ],
+
+    "Extreamly Obese": [
+        "Start with low-impact activities like seated exercises, chair yoga, or gentle stretching to gradually increase activity levels.",
+        "Focus on building strength and mobility through bodyweight exercises, resistance bands, or light weights.",
+        "Incorporate activities that support joint health and improve range of motion, such as aquatic exercises or tai chi.",
+        "Set realistic goals and track progress to stay motivated and accountable.",
+        "Consider working with a certified fitness professional or physical therapist to design a safe and effective exercise program tailored to your needs and abilities."
+    ]
+}
+
+    

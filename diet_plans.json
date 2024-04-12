@@ -1,0 +1,37 @@
+{
+    "Underweight": [
+        "Increase calorie intake with nutrient-dense foods like nuts, seeds, avocados, and whole grains.",
+        "Incorporate protein-rich foods such as legumes, tofu, eggs, dairy (if non-veg), and lean meats (if non-veg).",
+        "Consume healthy fats from sources like olive oil, fatty fish (if non-veg), nuts, and seeds.",
+        "Include regular meals and snacks to maintain energy levels.",
+        "Hydrate with water and avoid sugary beverages."
+    ],
+    "Healthy": [
+        "Maintain a balanced diet with fruits, vegetables, whole grains, lean proteins (tofu, legumes, eggs, dairy products and healthy fats.",
+        "Practice portion control and mindful eating.",
+        "Choose nutrient-dense foods over processed options.",
+        "Regularly engage in physical activity."
+    ],
+    "Overweight": [
+        "Control portion sizes and focus on whole, unprocessed foods.",
+        "Increase fiber intake from fruits, vegetables, legumes, and whole grains.",
+        "Opt for lean protein sources like tofu, legumes, poultry (if non-veg), and fish (if non-veg).",
+        "Limit consumption of high-calorie, low-nutrient foods.",
+        "Exercise regularly, combining aerobic and strength training."
+    ],
+    "Obese": [
+        "Aim for gradual weight loss by creating a calorie deficit.",
+        "Prioritize nutrient-dense, low-calorie foods.",
+        "Monitor portion sizes and practice mindful eating.",
+        "Include lean protein sources (tofu, legumes, poultry if non-veg, fish if non-veg) and limit high-calorie foods.",
+        "Engage in regular physical activity, focusing on both aerobic and strength exercises."
+    ],
+    "Extreamly Obese": [
+        "Seek professional guidance for a personalized weight loss plan.",
+        "Emphasize gradual, sustainable changes in diet and lifestyle.",
+        "Balance calorie intake with nutrient-dense foods.",
+        "Incorporate a variety of exercises, starting with low-impact activities.",
+        "Address underlying factors affecting weight through holistic approaches and professional support."
+    ]
+  }
+  
