@@ -7,7 +7,7 @@
         <script src="{{ url_for('static', filename='bmi.js') }}"></script>
       </head>
       <body>
-        <h3>Body Mass Index Calculator</h3>
+        <h3>BMI Calculator and Health Planner</h3>
       <form method="POST" class="form" id="form" >
       <div class="row-one">
         <input type="text" class="text-input" id="age" autocomplete="off" required/><p class="text">Age</p>
@@ -29,4 +29,10 @@
       <br>
       <div id="resultContainer"> </div>
     </body>
+    <script>
+      // Decrement the number of users when the page is closed by the user
+      window.addEventListener('beforeunload', function(event) {
+            fetch('/decrement_users', { method: 'POST' });
+        });    
+    </script>
 </html>
